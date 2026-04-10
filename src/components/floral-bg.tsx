@@ -1,112 +1,117 @@
+function Flower({ color1, color2, size = 120 }: { color1: string; color2: string; size?: number }) {
+  const cx = size / 2
+  const r = size * 0.13
+  const petalR = size * 0.22
+  const petalDist = size * 0.28
+  const angles = [0, 60, 120, 180, 240, 300]
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      {angles.map((angle) => {
+        const rad = (angle * Math.PI) / 180
+        const px = cx + petalDist * Math.cos(rad)
+        const py = cx + petalDist * Math.sin(rad)
+        return (
+          <ellipse
+            key={angle}
+            cx={px}
+            cy={py}
+            rx={petalR * 0.55}
+            ry={petalR}
+            transform={`rotate(${angle} ${px} ${py})`}
+            fill={color1}
+            opacity="0.8"
+          />
+        )
+      })}
+      <circle cx={cx} cy={cx} r={r} fill={color2} opacity="0.95" />
+    </svg>
+  )
+}
+
+function SmallFlower({ color1, color2, size = 70 }: { color1: string; color2: string; size?: number }) {
+  const cx = size / 2
+  const r = size * 0.14
+  const petalR = size * 0.24
+  const petalDist = size * 0.3
+  const angles = [0, 72, 144, 216, 288]
+
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
+      {angles.map((angle) => {
+        const rad = (angle * Math.PI) / 180
+        const px = cx + petalDist * Math.cos(rad)
+        const py = cx + petalDist * Math.sin(rad)
+        return (
+          <ellipse
+            key={angle}
+            cx={px}
+            cy={py}
+            rx={petalR * 0.5}
+            ry={petalR}
+            transform={`rotate(${angle} ${px} ${py})`}
+            fill={color1}
+            opacity="0.75"
+          />
+        )
+      })}
+      <circle cx={cx} cy={cx} r={r} fill={color2} opacity="0.95" />
+    </svg>
+  )
+}
+
+function Leaf({ size = 60, rotate = 0 }: { size?: number; rotate?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 60 60" fill="none" style={{ transform: `rotate(${rotate}deg)` }}>
+      <ellipse cx="30" cy="30" rx="10" ry="28" fill="#a8c8a0" opacity="0.55" />
+    </svg>
+  )
+}
+
 export function FloralBg() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
-      {/* Top-left corner */}
-      <svg className="absolute -top-8 -left-8 w-[340px] opacity-20" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="80" cy="80" r="38" fill="#F9D8DC" />
-        <circle cx="120" cy="50" r="22" fill="#C2D9F0" />
-        <circle cx="50" cy="130" r="18" fill="#D6EEF8" />
-        <circle cx="155" cy="80" r="14" fill="#F9D8DC" />
-        <circle cx="90" cy="155" r="16" fill="#C2D9F0" />
-        {/* Petals */}
-        {[0,60,120,180,240,300].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={80 + 48 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 48 * Math.sin((angle * Math.PI) / 180)}
-            rx="16" ry="26"
-            transform={`rotate(${angle} ${80 + 48 * Math.cos((angle * Math.PI) / 180)} ${80 + 48 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#F9D8DC"
-            opacity="0.6"
-          />
-        ))}
-        <circle cx="80" cy="80" r="14" fill="#FAF7F0" />
-        {/* Small flower */}
-        {[0,72,144,216,288].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={155 + 24 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 24 * Math.sin((angle * Math.PI) / 180)}
-            rx="8" ry="13"
-            transform={`rotate(${angle} ${155 + 24 * Math.cos((angle * Math.PI) / 180)} ${80 + 24 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#C2D9F0"
-            opacity="0.7"
-          />
-        ))}
-        <circle cx="155" cy="80" r="7" fill="#FAF7F0" />
-        {/* Leaves */}
-        <ellipse cx="60" cy="170" rx="10" ry="24" transform="rotate(-30 60 170)" fill="#b8d8b0" opacity="0.4" />
-        <ellipse cx="100" cy="185" rx="8" ry="20" transform="rotate(20 100 185)" fill="#b8d8b0" opacity="0.35" />
-        <ellipse cx="140" cy="115" rx="7" ry="18" transform="rotate(-50 140 115)" fill="#b8d8b0" opacity="0.35" />
-      </svg>
+      {/* Top-left */}
+      <div className="absolute -top-4 -left-4">
+        <div className="relative w-[220px] h-[220px]">
+          <div className="absolute top-0 left-0"><Flower color1="#F9D8DC" color2="#fff5f7" size={150} /></div>
+          <div className="absolute top-2 left-[100px]"><SmallFlower color1="#C2D9F0" color2="#f0f8ff" size={85} /></div>
+          <div className="absolute top-[100px] left-4"><SmallFlower color1="#D6EEF8" color2="#f0f8ff" size={65} /></div>
+          <div className="absolute top-[80px] left-[130px]"><Leaf size={52} rotate={-35} /></div>
+          <div className="absolute top-0 left-[150px]"><Leaf size={48} rotate={15} /></div>
+        </div>
+      </div>
 
-      {/* Top-right corner */}
-      <svg className="absolute -top-8 -right-8 w-[320px] opacity-20 scale-x-[-1]" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="80" cy="80" r="38" fill="#D6EEF8" />
-        {[0,60,120,180,240,300].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={80 + 48 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 48 * Math.sin((angle * Math.PI) / 180)}
-            rx="16" ry="26"
-            transform={`rotate(${angle} ${80 + 48 * Math.cos((angle * Math.PI) / 180)} ${80 + 48 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#C2D9F0"
-            opacity="0.6"
-          />
-        ))}
-        <circle cx="80" cy="80" r="14" fill="#FAF7F0" />
-        {[0,72,144,216,288].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={155 + 24 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 24 * Math.sin((angle * Math.PI) / 180)}
-            rx="8" ry="13"
-            transform={`rotate(${angle} ${155 + 24 * Math.cos((angle * Math.PI) / 180)} ${80 + 24 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#F9D8DC"
-            opacity="0.7"
-          />
-        ))}
-        <circle cx="155" cy="80" r="7" fill="#FAF7F0" />
-        <ellipse cx="60" cy="170" rx="10" ry="24" transform="rotate(-30 60 170)" fill="#b8d8b0" opacity="0.4" />
-        <ellipse cx="100" cy="185" rx="8" ry="20" transform="rotate(20 100 185)" fill="#b8d8b0" opacity="0.35" />
-      </svg>
+      {/* Top-right */}
+      <div className="absolute -top-4 -right-4">
+        <div className="relative w-[220px] h-[220px]">
+          <div className="absolute top-0 right-0"><Flower color1="#C2D9F0" color2="#f0f8ff" size={150} /></div>
+          <div className="absolute top-2 right-[100px]"><SmallFlower color1="#F9D8DC" color2="#fff5f7" size={85} /></div>
+          <div className="absolute top-[100px] right-4"><SmallFlower color1="#F9D8DC" color2="#fff5f7" size={65} /></div>
+          <div className="absolute top-[80px] right-[130px]"><Leaf size={52} rotate={215} /></div>
+          <div className="absolute top-0 right-[150px]"><Leaf size={48} rotate={165} /></div>
+        </div>
+      </div>
 
       {/* Bottom-left */}
-      <svg className="absolute -bottom-8 -left-8 w-[300px] opacity-15 scale-y-[-1]" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="80" cy="80" r="38" fill="#F9D8DC" />
-        {[0,60,120,180,240,300].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={80 + 48 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 48 * Math.sin((angle * Math.PI) / 180)}
-            rx="16" ry="26"
-            transform={`rotate(${angle} ${80 + 48 * Math.cos((angle * Math.PI) / 180)} ${80 + 48 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#F9D8DC"
-            opacity="0.5"
-          />
-        ))}
-        <circle cx="80" cy="80" r="14" fill="#FAF7F0" />
-        <ellipse cx="155" cy="60" rx="7" ry="18" transform="rotate(30 155 60)" fill="#b8d8b0" opacity="0.4" />
-        <ellipse cx="180" cy="100" rx="8" ry="20" transform="rotate(-20 180 100)" fill="#b8d8b0" opacity="0.35" />
-      </svg>
+      <div className="absolute -bottom-4 -left-4">
+        <div className="relative w-[200px] h-[200px]">
+          <div className="absolute bottom-0 left-0"><Flower color1="#D6EEF8" color2="#f0f8ff" size={140} /></div>
+          <div className="absolute bottom-2 left-[95px]"><SmallFlower color1="#F9D8DC" color2="#fff5f7" size={75} /></div>
+          <div className="absolute bottom-[85px] left-2"><Leaf size={48} rotate={40} /></div>
+          <div className="absolute bottom-[60px] left-[120px]"><Leaf size={44} rotate={-10} /></div>
+        </div>
+      </div>
 
       {/* Bottom-right */}
-      <svg className="absolute -bottom-8 -right-8 w-[280px] opacity-15 scale-[-1]" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="80" cy="80" r="38" fill="#C2D9F0" />
-        {[0,60,120,180,240,300].map((angle, i) => (
-          <ellipse
-            key={i}
-            cx={80 + 48 * Math.cos((angle * Math.PI) / 180)}
-            cy={80 + 48 * Math.sin((angle * Math.PI) / 180)}
-            rx="16" ry="26"
-            transform={`rotate(${angle} ${80 + 48 * Math.cos((angle * Math.PI) / 180)} ${80 + 48 * Math.sin((angle * Math.PI) / 180)})`}
-            fill="#D6EEF8"
-            opacity="0.6"
-          />
-        ))}
-        <circle cx="80" cy="80" r="14" fill="#FAF7F0" />
-        <ellipse cx="155" cy="60" rx="7" ry="18" transform="rotate(30 155 60)" fill="#b8d8b0" opacity="0.4" />
-      </svg>
+      <div className="absolute -bottom-4 -right-4">
+        <div className="relative w-[200px] h-[200px]">
+          <div className="absolute bottom-0 right-0"><Flower color1="#F9D8DC" color2="#fff5f7" size={140} /></div>
+          <div className="absolute bottom-2 right-[95px]"><SmallFlower color1="#C2D9F0" color2="#f0f8ff" size={75} /></div>
+          <div className="absolute bottom-[85px] right-2"><Leaf size={48} rotate={-140} /></div>
+          <div className="absolute bottom-[60px] right-[120px]"><Leaf size={44} rotate={190} /></div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -25,7 +25,7 @@ function useCountdown(targetDate: string) {
 
 const images = [
   "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/977a7945-e94c-4702-a0a7-60535874784f.jpg",
-  "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/7cf42851-03c0-4c7e-b782-c1141b9e8f17.jpg",
+  "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/bucket/0bb6a3a2-0c90-4865-8d3d-9b5ede5650ab.jpg",
   "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/0087bc1e-f259-452f-8484-118f9a18ae59.jpg",
 ]
 

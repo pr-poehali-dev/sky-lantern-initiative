@@ -1,5 +1,27 @@
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
+
+function useCountdown(targetDate: string) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+
+  useEffect(() => {
+    const update = () => {
+      const diff = new Date(targetDate).getTime() - Date.now()
+      if (diff <= 0) return
+      setTimeLeft({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      })
+    }
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
+  }, [targetDate])
+
+  return timeLeft
+}
 
 const images = [
   "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/977a7945-e94c-4702-a0a7-60535874784f.jpg",
@@ -8,6 +30,7 @@ const images = [
 ]
 
 export function HeroSection() {
+  const { days, hours, minutes, seconds } = useCountdown("2026-07-26T12:00:00")
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -77,12 +100,20 @@ export function HeroSection() {
         transition={{ duration: 1, delay: 0.8 }}
       >
         <div className="text-center">
+          <p className="text-sm font-sans text-foreground/60 mix-blend-difference tracking-widest uppercase mb-3">
+            26 июля 2026
+          </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-foreground mix-blend-difference">
             Данил <em className="italic">&</em> Валерия
           </h1>
-          <p className="text-lg md:text-xl font-serif text-foreground/70 mix-blend-difference mt-3 tracking-widest uppercase">
-            Свадебное торжество
-          </p>
+          <div className="flex items-center justify-center gap-6 mt-6 mix-blend-difference">
+            {[{ v: days, l: "дней" }, { v: hours, l: "часов" }, { v: minutes, l: "минут" }, { v: seconds, l: "секунд" }].map(({ v, l }) => (
+              <div key={l} className="text-center">
+                <span className="text-3xl md:text-4xl font-serif text-foreground tabular-nums">{String(v).padStart(2, "0")}</span>
+                <p className="text-xs text-foreground/50 uppercase tracking-wider mt-1">{l}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
 

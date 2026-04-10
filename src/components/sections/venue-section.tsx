@@ -58,7 +58,7 @@ export function VenueSection() {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Начало</p>
-                  <p className="text-muted-foreground text-sm mt-0.5">В 12:00</p>
+                  <p className="text-muted-foreground text-sm mt-0.5">В 14:00</p>
                 </div>
               </div>
             </div>

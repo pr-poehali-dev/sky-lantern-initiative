@@ -8,6 +8,7 @@ import { CarouselSection } from "@/components/sections/carousel-section"
 import { InsightsSection } from "@/components/sections/insights-section"
 import { PricingSection } from "@/components/sections/pricing-section"
 import { VenueSection } from "@/components/sections/venue-section"
+import { PaletteSection } from "@/components/sections/palette-section"
 import { FooterSection } from "@/components/sections/footer-section"
 
 const Index = () => {
@@ -18,6 +19,7 @@ const Index = () => {
         <HeroSection />
         <ManifestoSection />
         <VenueSection />
+        <PaletteSection />
         <FeaturesSection />
         <ShowcaseSection />
         <CarouselSection />

@@ -3,26 +3,26 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
-const articles = [
+const tips = [
   {
-    title: "Искусство визуального сторителлинга",
-    category: "Дизайн",
-    image: "/visual-storytelling-design-article.jpg",
+    title: "Как выбрать цветовую палитру для свадьбы",
+    category: "Стиль",
+    image: "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/94d4d692-e212-4861-ad32-d6982df79d85.jpg",
   },
   {
-    title: "Как создать личный бренд онлайн",
-    category: "Стратегия",
-    image: "/personal-branding-digital-marketing.jpg",
+    title: "Дресс-код для гостей: советы и примеры",
+    category: "Советы",
+    image: "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/977a7945-e94c-4702-a0a7-60535874784f.jpg",
   },
   {
-    title: "Тренды типографики 2025",
-    category: "Типографика",
-    image: "/typography-trends-modern-fonts.jpg",
+    title: "Как организовать выездную церемонию",
+    category: "Организация",
+    image: "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/9f8cdf7e-97b0-47cb-8847-a48be632f073.jpg",
   },
   {
-    title: "Минимализм в дизайне портфолио",
-    category: "Вдохновение",
-    image: "/placeholder.svg?height=200&width=300",
+    title: "Флористика и декор: создаём атмосферу",
+    category: "Декор",
+    image: "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/0087bc1e-f259-452f-8484-118f9a18ae59.jpg",
   },
 ]
 
@@ -43,11 +43,11 @@ export function InsightsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Статьи
+          Полезное
         </motion.p>
 
         <div className="divide-y divide-border">
-          {articles.map((article, i) => (
+          {tips.map((tip, i) => (
             <motion.a
               key={i}
               href="#"
@@ -62,9 +62,9 @@ export function InsightsSection() {
               data-clickable
             >
               <div className="flex-1">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">{tip.category}</span>
                 <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
-                  {article.title}
+                  {tip.title}
                 </h3>
               </div>
               <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
@@ -72,7 +72,6 @@ export function InsightsSection() {
           ))}
         </div>
 
-        {/* Floating hover image */}
         <AnimatePresence>
           {hoveredIndex !== null && (
             <motion.div
@@ -88,8 +87,8 @@ export function InsightsSection() {
               transition={{ duration: 0.2 }}
             >
               <img
-                src={articles[hoveredIndex].image || "/placeholder.svg"}
-                alt={articles[hoveredIndex].title}
+                src={tips[hoveredIndex].image}
+                alt={tips[hoveredIndex].title}
                 className="w-full h-auto"
               />
             </motion.div>

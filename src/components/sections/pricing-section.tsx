@@ -3,18 +3,29 @@ import { Check } from "lucide-react"
 
 const plans = [
   {
-    name: "Старт",
-    price: "1 200",
-    period: " руб/мес",
-    description: "Для личного портфолио",
-    features: ["5 страниц", "Свой домен", "Базовая аналитика", "Поддержка по email"],
+    name: "Приглашение",
+    price: "Бесплатно",
+    period: "",
+    description: "Для одной свадьбы",
+    features: [
+      "Персональная страница",
+      "Информация о месте",
+      "Цветовая палитра",
+      "Анкета для гостей",
+    ],
   },
   {
-    name: "Про",
+    name: "Премиум",
     price: "2 900",
-    period: " руб/мес",
-    description: "Для растущих авторов",
-    features: ["Безлимит страниц", "Приоритет поддержки", "Расширенная аналитика", "Свой брендинг", "Работа в команде"],
+    period: " руб",
+    description: "Всё для идеальной свадьбы",
+    features: [
+      "Всё из бесплатного",
+      "Свой домен (ваша-свадьба.ru)",
+      "Фотогалерея",
+      "Уведомления на почту",
+      "Приоритетная поддержка",
+    ],
     popular: true,
   },
 ]
@@ -29,8 +40,8 @@ export function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-serif text-foreground">Простые и понятные цены</h2>
-          <p className="text-muted-foreground mt-4 max-w-md mx-auto">Начните бесплатно, платите когда готовы.</p>
+          <h2 className="text-3xl md:text-5xl font-serif text-foreground">Просто и понятно</h2>
+          <p className="text-muted-foreground mt-4 max-w-md mx-auto">Создайте приглашение бесплатно. Улучшите, когда будете готовы.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -45,7 +56,7 @@ export function PricingSection() {
               data-clickable
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-lime text-foreground text-xs font-medium px-3 py-1 rounded-full">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
                   Популярный
                 </span>
               )}
@@ -54,7 +65,7 @@ export function PricingSection() {
                 <h3 className="font-serif text-xl text-foreground">{plan.name}</h3>
                 <div className="mt-4 flex items-baseline justify-center gap-1">
                   <span className="text-4xl md:text-5xl font-serif text-foreground">{plan.price}</span>
-                  <span className="text-muted-foreground">{plan.period}</span>
+                  {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
                 </div>
                 <p className="text-muted-foreground text-sm mt-2">{plan.description}</p>
               </div>
@@ -75,7 +86,7 @@ export function PricingSection() {
                     : "bg-secondary text-foreground hover:bg-accent/30"
                 }`}
               >
-                Начать
+                Создать приглашение
               </button>
             </motion.div>
           ))}

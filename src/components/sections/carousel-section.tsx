@@ -1,17 +1,18 @@
 import { motion } from "framer-motion"
 
-const portfolioItems = [
-  "/portfolio-website-design-preview-modern.jpg",
-  "/photography-portfolio-website-clean.jpg",
-  "/architecture-firm-website-minimal.jpg",
-  "/design-agency-portfolio-dark-theme.jpg",
-  "/artist-portfolio-website-creative.jpg",
-  "/writer-portfolio-website-elegant.jpg",
+const weddingDetails = [
+  { emoji: "💐", label: "Букеты невесты" },
+  { emoji: "🕊️", label: "Выездная церемония" },
+  { emoji: "🥂", label: "Свадебный банкет" },
+  { emoji: "💌", label: "Приглашения" },
+  { emoji: "🎶", label: "Живая музыка" },
+  { emoji: "📸", label: "Фотосессия" },
+  { emoji: "🎂", label: "Свадебный торт" },
+  { emoji: "🌹", label: "Флористика" },
 ]
 
 export function CarouselSection() {
-  // Duplicate for seamless loop
-  const items = [...portfolioItems, ...portfolioItems]
+  const items = [...weddingDetails, ...weddingDetails]
 
   return (
     <section className="bg-primary py-24 overflow-hidden">
@@ -22,7 +23,7 @@ export function CarouselSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Создано авторами для авторов.
+          Создано с любовью — для вашего дня.
         </motion.h2>
       </div>
 
@@ -36,17 +37,14 @@ export function CarouselSection() {
             ease: "linear",
           }}
         >
-          {items.map((src, i) => (
+          {items.map((item, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[300px] md:w-[400px] rounded-xl overflow-hidden shadow-2xl"
+              className="flex-shrink-0 w-[200px] md:w-[240px] rounded-xl overflow-hidden bg-primary-foreground/10 shadow-xl flex flex-col items-center justify-center py-10 gap-4"
               data-clickable
             >
-              <img
-                src={src || "/placeholder.svg"}
-                alt={`Пример портфолио ${(i % portfolioItems.length) + 1}`}
-                className="w-full h-auto"
-              />
+              <span className="text-5xl">{item.emoji}</span>
+              <span className="text-primary-foreground font-serif text-lg text-center px-4">{item.label}</span>
             </div>
           ))}
         </motion.div>

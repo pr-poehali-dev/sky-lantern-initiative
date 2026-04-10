@@ -2,9 +2,15 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 const showcaseImages = [
-  "/modern-architecture-building-exterior-minimal.jpg",
-  "/fashion-model-editorial-portrait-dramatic-lighting.jpg",
-  "/interior-design-minimalist-living-room-natural-lig.jpg",
+  "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/9f8cdf7e-97b0-47cb-8847-a48be632f073.jpg",
+  "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/94d4d692-e212-4861-ad32-d6982df79d85.jpg",
+  "https://cdn.poehali.dev/projects/6d427057-5792-4136-a44c-fde27b6f85ce/files/1a6f0e9c-e5bd-4715-ac14-936b76e2fbde.jpg",
+]
+
+const captions = [
+  "Незабываемый закат",
+  "Палитра вашего дня",
+  "Приглашение с душой",
 ]
 
 export function ShowcaseSection() {
@@ -29,14 +35,14 @@ export function ShowcaseSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Галерея
+          Вдохновение
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {showcaseImages.map((src, i) => (
             <motion.div
               key={i}
-              className="relative h-[400px] md:h-[500px] rounded-xl overflow-hidden group"
+              className="relative rounded-xl overflow-hidden group"
               style={{ y: yValues[i] }}
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               whileInView={{ clipPath: "inset(0 0 0 0)" }}
@@ -48,13 +54,18 @@ export function ShowcaseSection() {
               }}
               data-clickable
             >
-              <motion.img
-                src={src}
-                alt={`Изображение ${i + 1}`}
-                className="w-full h-full object-cover"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              />
+              <div className="h-[400px] md:h-[500px]">
+                <motion.img
+                  src={src}
+                  alt={captions[i]}
+                  className="w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+                <p className="text-white font-serif text-lg">{captions[i]}</p>
+              </div>
             </motion.div>
           ))}
         </div>

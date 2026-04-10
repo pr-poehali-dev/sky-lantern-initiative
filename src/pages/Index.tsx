@@ -10,6 +10,7 @@ import { InsightsSection } from "@/components/sections/insights-section"
 import { PricingSection } from "@/components/sections/pricing-section"
 import { VenueSection } from "@/components/sections/venue-section"
 import { PaletteSection } from "@/components/sections/palette-section"
+import { RsvpSection } from "@/components/sections/rsvp-section"
 import { FooterSection } from "@/components/sections/footer-section"
 
 const Index = () => {
@@ -26,7 +27,7 @@ const Index = () => {
         <ShowcaseSection />
         <CarouselSection />
         <InsightsSection />
-        <PricingSection />
+        <RsvpSection />
         <FooterSection />
       </main>
     </LenisProvider>

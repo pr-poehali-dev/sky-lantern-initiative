@@ -1,0 +1,13 @@
+{
+  "tests": [
+    {
+      "name": "RSVP submit attending",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Тест Гость", "attending": true, "guests_count": 2, "menu": "standard", "wishes": ""},
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}

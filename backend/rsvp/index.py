@@ -1,9 +1,18 @@
 import json
 import os
 import psycopg2
+import urllib.request
+
+def send_telegram(text: str):
+    token = os.environ["TELEGRAM_BOT_TOKEN"]
+    chat_id = os.environ["TELEGRAM_CHAT_ID"]
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    data = json.dumps({"chat_id": chat_id, "text": text, "parse_mode": "HTML"}).encode()
+    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+    urllib.request.urlopen(req)
 
 def handler(event: dict, context) -> dict:
-    """Сохраняет анкету гостя свадьбы в базу данных."""
+    """Сохраняет анкету гостя свадьбы и отправляет уведомление в Telegram."""
     headers = {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -36,5 +45,20 @@ def handler(event: dict, context) -> dict:
     conn.commit()
     cur.close()
     conn.close()
+
+    menu_labels = {"strong": "Крепкие", "medium": "Средней крепости", "none": "Не пью", "standard": "Стандартное"}
+    attending_text = "✅ Придёт" if attending else "❌ Не придёт"
+    text = (
+        f"💌 <b>Новый ответ гостя!</b>\n\n"
+        f"👤 <b>Имя:</b> {name}\n"
+        f"{attending_text}\n"
+    )
+    if attending:
+        text += f"👥 <b>Гостей:</b> {guests_count}\n"
+        text += f"🥂 <b>Алкоголь:</b> {menu_labels.get(menu, menu)}\n"
+    if wishes:
+        text += f"💬 <b>Пожелания:</b> {wishes}"
+
+    send_telegram(text)
 
     return {"statusCode": 200, "headers": headers, "body": json.dumps({"ok": True})}

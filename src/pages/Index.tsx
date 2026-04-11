@@ -3,8 +3,7 @@ import { CustomCursor } from "@/components/custom-cursor"
 import { FloralBg } from "@/components/floral-bg"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ManifestoSection } from "@/components/sections/manifesto-section"
-import { CarouselSection } from "@/components/sections/carousel-section"
-import { PricingSection } from "@/components/sections/pricing-section"
+
 import { VenueSection } from "@/components/sections/venue-section"
 import { PaletteSection } from "@/components/sections/palette-section"
 import { RsvpSection } from "@/components/sections/rsvp-section"
@@ -20,7 +19,6 @@ const Index = () => {
         <ManifestoSection />
         <VenueSection />
         <PaletteSection />
-        <CarouselSection />
         <RsvpSection />
         <FooterSection />
       </main>

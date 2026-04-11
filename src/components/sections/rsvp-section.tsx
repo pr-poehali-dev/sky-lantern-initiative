@@ -156,10 +156,11 @@ export function RsvpSection() {
                     {/* Алкоголь */}
                     <div>
                       <label className="block text-sm font-medium text-foreground mb-3">Предпочтения по алкоголю</label>
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 gap-3">
                         {[
-                          { val: "standard", label: "Всё подряд", icon: "🥂" },
-                          { val: "wine", label: "Только вино", icon: "🍷" },
+                          { val: "all", label: "Всё подряд", icon: "🥂" },
+                          { val: "strong", label: "Крепкие", icon: "🥃" },
+                          { val: "medium", label: "Средней крепости", icon: "🍷" },
                           { val: "none", label: "Не пью", icon: "🧃" },
                         ].map(({ val, label, icon }) => (
                           <button
